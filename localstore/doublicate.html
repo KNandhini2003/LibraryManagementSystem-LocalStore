@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="localstoragepro.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        body {
+            background-image: url("booklast.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-size: 20px;
+            margin: 0;
+        }
+        .container {
+            width: 100%;
+            height: 60px;
+            background-color: black;
+            padding: 7px;
+        }
+        .navigation a {
+            text-decoration: none;
+            font-size: 20px;
+            padding-right: 10px;
+            margin-right: 10px;
+            padding-top: 3px;
+            color:white;
+            margin-top:5px;
+            /* background-color: black; */
+        }
+        .form-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            visibility: hidden;
+            font-size: 20px;
+        }
+        .form-container.visible {
+            visibility: visible;
+        }
+        .form-container form {
+            background-color: transparent;
+            font-size: large;
+            /* background-color: yellowgreen; */
+            width: 500px;
+            height: 500px;
+            padding: 20px;
+        }
+       .form-container label{
+            font-size: 20px;
+           
+            margin-left:2px;
+            margin-right: 50px;
+        }
+        h2{
+            text-align: center;
+        }
+        .form-container input{
+            width:200px;
+            font-size: 15px;
+            padding: 6px;
+            margin:5px;
+           border-radius: 20px;/*background-color:black;color: white; */
+            margin-left: 10px;
+            color: black;
+            border:4px solid black;
+        }
+        button{
+            border-radius: 20px;
+            color:white;
+            border:4px solid black;
+            background-color: black;
+            padding:2px;
+        }
+        background-image{
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center; height: 70vh;
+    }
+
+    .flex-card {
+        width: 200px;
+        height: 200px;
+        margin: 10px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-top:50px; 
+        /* last */
+    }
+
+
+    .flex-card h3 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        text-align: center;
+        color: white;
+    }
+
+    .buy-button {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: black;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 18px;
+        border: none;
+    }
+
+    /* Rest of the styles... */
+    
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navigation">
+            <i style="color: white;" class="fa-solid fa-house-user"></i><a href="#">Home</a>
+            <i style="color: white;"class="fa-solid fa-arrow-right-to-bracket"></i><a href="#" onclick="showForm('signin')">Signin</a>
+            <i style="color: white;"class="fa-solid fa-user-plus"></i> <a href="#" onclick="showForm('signup')">SignUp</a>
+        </div>
+    </div>
+
+    <div class="form-container" id="signinForm">
+        <form onsubmit="return validateSignIn()">
+            
+            <h1>Signin Form</h1>
+            <label for="UserName">Username</label>
+            <input type="text" id="signinUsername" placeholder="&#x1F464;Enter username" required /><br>
+            <label for="Password">Password</label>
+            <input type="password" id="signinPassword" placeholder="&#xaf4b9e;Enter password" required /><br>
+            <button type="submit" value="Submit">Login</button>
+            <button type="button" onclick="hideForm('signinForm')">Back</button>
+        </form>
+    </div>
+
+    <div class="form-container" id="signupForm">
+        <form onsubmit="return saveSignUpData()">
+            <h1>Signup Form</h1>
+            <label for="UserName">Username</label>
+            <input type="text" id="signupUsername" placeholder="&#x1F464;Enter username" required /><br>
+            <label for="Password">Password</label>
+            <input type="password" id="signupPassword" placeholder="&#xaf4b9e;Enter  password" required /><br>
+            <button type="submit" value="Submit">Register</button>
+            <button type="button" onclick="hideForm('signupForm')">Back</button>
+        </form>
+    </div>
+
+
+    <div class="flex-container">
+        <div class="flex-card" style="background-image: url('image1.jpg');">
+            <h3 style="color: transparent;">Card 1</h3>
+            <button class="buy-button">Buy</button>
+        </div>
+        <div class="flex-card" style="background-image: url('image2.jpg'); ">
+            <h3 style="color: transparent;">Card 2</h3>
+            <button class="buy-button">Buy</button>
+        </div>
+        <div class="flex-card" style="background-image: url('image3.jpg');">
+            <h3 style="color: transparent;">Card 3</h3>
+            <button class="buy-button">Buy</button>
+        </div>
+        <div class="flex-card" style="background-image: url('image4.jpg');">
+            <h3 style="color: transparent;">Card 4</h3>
+            <button class="buy-button">Buy</button>
+        </div>
+        <div class="flex-card" style="background-image: url('image5.jpg');">
+            <h3 style="color: transparent;">Card 5</h3>
+            <button class="buy-button">Buy</button>
+        </div>
+    <!-- </div> -->
+<!--  -->
+<!-- <div class="flex-container"> -->
+    <div class="flex-card" style="background-image: url('image6.jpg');">
+        <h3 style="color: transparent;">Card 1</h3>
+        <button class="buy-button">Buy</button>
+    </div>
+    <div class="flex-card" style="background-image: url('image7.jpg');">
+        <h3 style="color: transparent;">Card 2</h3>
+        <button class="buy-button">Buy</button>
+    </div>
+    <div class="flex-card" style="background-image: url('image8.jpg');">
+        <h3 style="color: transparent;">Card 3</h3>
+        <button class="buy-button">Buy</button>
+    </div>
+    <div class="flex-card" style="background-image: url('image9.jpg');">
+        <h3 style="color: transparent;">Card 4</h3>
+        <button class="buy-button">Buy</button>
+    </div>
+    <div class="flex-card" style="background-image: url('1b.webp');">
+        <h3 style="color: transparent;">Card 5</h3>
+        <button class="buy-button">Buy</button>
+    </div>
+</div>
+
+
+
+
+<!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        function showForm(formType) {
+            var signinForm = document.getElementById('signinForm');
+            var signupForm = document.getElementById('signupForm');
+
+            if (formType === 'signin') {
+                signinForm.classList.add('visible');
+                signupForm.classList.remove('visible');
+            } else if (formType === 'signup') {
+                signinForm.classList.remove('visible');
+                signupForm.classList.add('visible');
+            }
+        }
+
+        function hideForm(formId) {
+            var form = document.getElementById(formId);
+            form.classList.remove('visible');
+        }
+
+        function saveSignUpData() {
+            var username = document.getElementById('signupUsername').value;
+            var password = document.getElementById('signupPassword').value;
+
+            var userData = {
+                username: username,
+                password: password
+            };
+
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            alert('Registration successful. Please sign in to continue.');
+
+            return true;
+        }
+
+        function validateSignIn() {
+            var username = document.getElementById('signinUsername').value;
+            var password = document.getElementById('signinPassword').value;
+
+            var userData = JSON.parse(localStorage.getItem('userData'));
+
+            if (userData && username === userData.username && password === userData.password) {
+                alert('Login successful. Redirecting to the new page.');
+                window.location.href = 'index1.html';
+            } else {
+                alert('Invalid username or password. Please try again.');
+            }
+
+            return false;
+        }
+        // <script>
+    function showForm(formType) {
+        var signinForm = document.getElementById('signinForm');
+        var signupForm = document.getElementById('signupForm');
+        var flexContainer = document.querySelector('.flex-container');
+
+        if (formType === 'signin') {
+            signinForm.classList.add('visible');
+            signupForm.classList.remove('visible');
+            flexContainer.style.display = 'none';
+        } else if (formType === 'signup') {
+            signinForm.classList.remove('visible');
+            signupForm.classList.add('visible');
+            flexContainer.style.display = 'none';
+        }
+    }
+
+    function hideForm(formId) {
+        var form = document.getElementById(formId);
+        form.classList.remove('visible');
+        var flexContainer = document.querySelector('.flex-container');
+        flexContainer.style.display = 'flex';
+    }
+
+    function saveSignUpData() {
+        var username = document.getElementById('signupUsername').value;
+        var password = document.getElementById('signupPassword').value;
+
+        var userData = {
+            username: username,
+            password: password
+        };
+
+        localStorage.setItem('userData', JSON.stringify(userData));
+
+        alert('Registration successful. Please sign in to continue.');
+
+        return true;
+    }
+
+    function validateSignIn() {
+        var username = document.getElementById('signinUsername').value;
+        var password = document.getElementById('signinPassword').value;
+
+        var userData = JSON.parse(localStorage.getItem('userData'));
+
+        if (userData && username === userData.username && password === userData.password) {
+            alert('Login successful. Redirecting to the new page.');
+            window.location.href = 'index1.html';
+        } else {
+            alert('Invalid username or password. Please try again.');
+        }
+
+        return false;
+    }
+
+
+    </script>
+</body>
+</html>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="localstoragepro.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        body {
+            background-image: url("booklast.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-size: 20px;
+        }
+        .container {
+            width: 100%;
+            height: 50px;
+        }
+        .navigation a {
+            text-decoration: none;
+            font-size: 20px;
+            padding-right: 10px;
+            margin-right: 10px;
+        }
+        .form-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            visibility: hidden;
+            font-size: 20px;
+        }
+        .form-container.visible {
+            visibility: visible;
+        }
+        .form-container form {
+            background-color: transparent;
+            font-size: large;
+            /* background-color: yellowgreen; */
+            width: 500px;
+            height: 500px;
+            padding: 20px;
+        }
+       .form-container label{
+            font-size: 20px;
+           
+            margin-left:2px;
+            margin-right: 50px;
+        }
+        h2{
+            text-align: center;
+        }
+        .form-container input{
+            width:200px;
+            font-size: 15px;
+            padding: 6px;
+            margin:5px;
+           border-radius: 20px;/*background-color:black;color: white; */
+            margin-left: 10px;
+            color: black;
+            border:4px solid black;
+        }
+        button{
+            border-radius: 20px;
+            color:white;
+            border:4px solid black;
+            background-color: black;
+            padding:2px;
+        }
+        background-image{
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .flex-card {
+        width: 300px;
+        height: 300px;
+        margin: 10px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+
+    .flex-card h3 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        text-align: center;
+        color: white;
+    }
+
+    .buy-button {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: black;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 18px;
+        border: none;
+    }
+
+    /* Rest of the styles... */
+    
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navigation">
+            <i class="fa-solid fa-house-user"></i><a href="#">Home</a>
+            <i class="fa-solid fa-arrow-right-to-bracket"></i><a href="#" onclick="showForm('signin')">Signin</a>
+            <i class="fa-solid fa-user-plus"></i> <a href="#" onclick="showForm('signup')">SignUp</a>
+        </div>
+    </div>
+
+    <div class="form-container" id="signinForm">
+        <form onsubmit="return validateSignIn()">
+            
+            <h1>Signin Form</h1>
+            <label for="UserName">Username</label>
+            <input type="text" id="signinUsername" placeholder="&#x1F464;Enter username" required /><br>
+            <label for="Password">Password</label>
+            <input type="password" id="signinPassword" placeholder="&#xaf4b9e;Enter password" required /><br>
+            <button type="submit" value="Submit">Login</button>
+            <button type="button" onclick="hideForm('signinForm')">Back</button>
+        </form>
+    </div>
+
+    <div class="form-container" id="signupForm">
+        <form onsubmit="return saveSignUpData()">
+            <h1>Signup Form</h1>
+            <label for="UserName">Username</label>
+            <input type="text" id="signupUsername" placeholder="&#x1F464;Enter username" required /><br>
+            <label for="Password">Password</label>
+            <input type="password" id="signupPassword" placeholder="&#xaf4b9e;Enter  password" required /><br>
+            <button type="submit" value="Submit">Register</button>
+            <button type="button" onclick="hideForm('signupForm')">Back</button>
+        </form>
+    </div>
+
+
+    <div class="flex-container">
+        <div class="flex-card" style="background-image: url('image1.jpg');">
+            <h3 style="color: transparent;">Card 1</h3>
+            <button class="buy-button">Buy</button>
+        </div>
+        <div class="flex-card" style="background-image: url('image2.jpg');">
+            <h3 style="color: transparent;">Card 2</h3>
+            <button class="buy-button">Buy</button>
+        </div>
+        <div class="flex-card" style="background-image: url('image3.jpg');">
+            <h3 style="color: transparent;">Card 3</h3>
+            <button class="buy-button">Buy</button>
+        </div>
+        <div class="flex-card" style="background-image: url('image4.jpg');">
+            <h3 style="color: transparent;">Card 4</h3>
+            <button class="buy-button">Buy</button>
+        </div>
+        <div class="flex-card" style="background-image: url('image5.jpg');">
+            <h3 style="color: transparent;">Card 5</h3>
+            <button class="buy-button">Buy</button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        function showForm(formType) {
+            var signinForm = document.getElementById('signinForm');
+            var signupForm = document.getElementById('signupForm');
+
+            if (formType === 'signin') {
+                signinForm.classList.add('visible');
+                signupForm.classList.remove('visible');
+            } else if (formType === 'signup') {
+                signinForm.classList.remove('visible');
+                signupForm.classList.add('visible');
+            }
+        }
+
+        function hideForm(formId) {
+            var form = document.getElementById(formId);
+            form.classList.remove('visible');
+        }
+
+        function saveSignUpData() {
+            var username = document.getElementById('signupUsername').value;
+            var password = document.getElementById('signupPassword').value;
+
+            var userData = {
+                username: username,
+                password: password
+            };
+
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            alert('Registration successful. Please sign in to continue.');
+
+            return true;
+        }
+
+        function validateSignIn() {
+            var username = document.getElementById('signinUsername').value;
+            var password = document.getElementById('signinPassword').value;
+
+            var userData = JSON.parse(localStorage.getItem('userData'));
+
+            if (userData && username === userData.username && password === userData.password) {
+                alert('Login successful. Redirecting to the new page.');
+                window.location.href = 'index1.html';
+            } else {
+                alert('Invalid username or password. Please try again.');
+            }
+
+            return false;
+        }
+    </script>
+</body>
+</html>
+
+ -->

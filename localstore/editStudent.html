@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+    <style>
+        body {
+            color: black;
+            background-image:url(booklast.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .container {
+            margin-top: 5rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .display-5 {
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group label {
+            margin-right: 5px;
+            width: 100px;
+            font-size: 19px;
+            font-weight: bold; /* Adjust the width as per your preference */
+        }
+
+        .form-group input {
+            width: 330px; /* Adjust the width as per your preference */
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            background-color: grey;
+            color:white;
+        }
+
+        .btn {
+            display: inline-block;
+            font-weight: 400;
+            color: #fff;
+            text-align: center;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-color: #007bff;
+            border: 1px solid transparent;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+            transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color:black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-5"><strong>Edit Datas</strong></h1>
+        </div>
+        <form id="edit-student-form" autocomplete="off">
+            <div class="form-group">
+                <label for="BookName">BookName</label>
+                <input type="text" name="BookName" id="BookName" placeholder="BookName" required>
+            </div>
+            <div class="form-group">
+                <label for="AuthorName">AuthorName</label>
+                <input type="text" name="AuthorName" id="AuthorName" placeholder="AuthorName" required>
+            </div>
+            <div class="form-group">
+                <label for="PublishYear">PublishYear</label>
+                <input type="date" name="PublishYear" id="PublishYear" placeholder="Year" required>
+            </div>
+            <div class="form-group">
+                <label for="Rate">Rate</label>
+                <input type="text" name="Rate" id="Rate" placeholder="Rate of book" required>
+            </div>
+            <div class="form-group">
+                <label for="Edision">Edision</label>
+                <input type="text" name="Edision" id="Edision" placeholder="Edision" required>
+            </div>
+            <div>
+                <button class="btn btn-success" type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Retrieve the student list from local storage
+        function getStudentList() {
+            let studentList = localStorage.getItem('studentList');
+            if (studentList) {
+                return JSON.parse(studentList);
+            }
+            return [];
+        }
+
+        // Save the updated student list to local storage
+        function saveStudentList(studentList) {
+            localStorage.setItem('studentList', JSON.stringify(studentList));
+        }
+
+        // Get the student index from the query parameter
+        function getStudentIndex() {
+            const params = new URLSearchParams(window.location.search);
+            return parseInt(params.get('index'));
+        }
+
+        // Populate the form with student data
+        function populateForm() {
+            const studentIndex = getStudentIndex();
+            const studentList = getStudentList();
+            const student = studentList[studentIndex];
+
+            document.getElementById('BookName').value = student.bookName;
+            document.getElementById('AuthorName').value = student.authorName;
+            document.getElementById('PublishYear').value = student.publishYear;
+            document.getElementById('Rate').value = student.rate;
+            document.getElementById('Edision').value = student.edision;
+        }
+
+        // Update the student details in the list
+        function updateStudent(event) {
+            event.preventDefault();
+
+            const studentIndex = getStudentIndex();
+            const studentList = getStudentList();
+
+            // Get form values
+            const bookName = document.getElementById('BookName').value;
+            const authorName = document.getElementById('AuthorName').value;
+            const publishYear = document.getElementById('PublishYear').value;
+            const rate = document.getElementById('Rate').value;
+            const edision = document.getElementById('Edision').value;
+
+            // Update the student object
+            studentList[studentIndex].bookName = bookName;
+            studentList[studentIndex].authorName = authorName;
+            studentList[studentIndex].publishYear = publishYear;
+            studentList[studentIndex].rate = rate;
+            studentList[studentIndex].edision = edision;
+
+            // Save the updated student list to local storage
+            saveStudentList(studentList);
+
+            // Redirect to studentList.html
+            window.location.href = 'studentList.html';
+        }
+
+        // Event listener for form submit
+        document.getElementById('edit-student-form').addEventListener('submit', updateStudent);
+
+        // Populate the form with student data on page load
+        populateForm();
+    </script>
+</body>
+</html> 

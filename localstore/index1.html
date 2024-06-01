@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App CRUD</title>
+    <style>
+        body {
+            /* background-image:url("lastim.jpg"); */
+            background-image: url("booklast.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* margin: 0;
+            padding: 0; */
+        }
+
+        .container {
+            margin-top: 5rem;
+            position: relative;
+         
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .display-5 {
+            margin-left: 620px;
+            margin-top: 50px;
+
+        }
+
+        .main {
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            /* border: 5px solid black; */
+            margin-left:35%;
+            /* background-image: url("bookpage.jpg"); */
+            background-image: url("lastim.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 20px;
+            opacity: 2px;
+            /* position:fixed; */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1rem;
+            width:200px;
+        }
+
+        label {
+            margin-bottom: 0.5rem;
+            font-size: 25px;
+            color: black;
+            font-weight: bold;
+            /* background-color: black; */
+            justify-content: center;
+            /* margin:20px; */
+        }
+
+        input {
+            width: 100%;
+            padding: 0.375rem 0.75rem;
+            font-size: 20px;
+            border: 3px solid #ced4da;
+            border-radius: 0.25rem;
+            margin-bottom: 0.5rem;
+            background-color:black;
+            -webkit-text-fill-color: white;
+        }
+
+        .add-btn {
+           
+            border-radius: 20px;
+            padding: 15px;
+            font-size: 15px;
+            font-weight: bold;
+            background-color: black;
+            -webkit-text-fill-color: white;
+
+        }
+        /* .container{
+            height: 500px;
+            width:500px;
+            background-color: brown;2
+            margin-top: 150px;
+            margin-left: 35%;
+            font-size: 25px;
+            padding: 10px; 
+            padding-left: 10px;
+
+        }
+         #student-form input,label{
+            padding-left: 5px;
+        } */
+      .bt{
+
+        padding:20px;
+        font-size: 25px;
+        color:white;
+        background-color: black;
+        border-radius: 20px;
+        margin-top: 40px;
+        text-decoration: none;
+        border: 2px;
+      }
+      .bt1{
+        padding:20px;
+        font-size: 25px;
+        color:white;
+        background-color: black;
+        border-radius: 20px;
+        margin-top: 15px;
+        text-decoration: none;
+        margin-left:1300px;
+      }
+      .tag{
+        max-width: 80%;
+        position: absolute;
+      }
+        
+    </style>
+</head>
+<body><!-- <button class="bt" onclick="location.href='try.html'">Back</button>
+<button  class="top-right-button" onclick="location.href='studentList.html'" >View Tables</button> -->
+    <a class="bt" href="try.html">Back</a>
+    <a class="bt1" href="studentList.html">View Book Datas</a>
+
+    <h1 class="display-5">ADD BOOK DETAILS </h1>
+    <div class="container">
+        
+        <div class="text-center">
+            <!-- <h1 class="display-5">ADD BOOK DETAILS</h1> -->
+        </div>  
+        <div class="main">
+            <form id="student-form" autocomplete="off">
+                <div>
+                    <label for="BookName">BookName</label>
+                    <input type="text" name="BookName" id="BookName" placeholder="BookName" required>
+                </div>
+                <div>
+                    <label for="AuthorName">AuthorName</label>
+                    <input type="text" name="AuthorName" id="AuthorName" placeholder="AuthorName" required>
+                </div>
+                <div>
+                    <label for="PublishYear">PublishYear</label>
+                    <input type="date" name="PublishYear" id="PublishYear" placeholder="Year" required>
+                </div>
+                <div>
+                    <label for="Rate">Rate</label>
+                    <input type="text" name="Rate" id="Rate" placeholder="Rate of book" required>
+                </div>
+                <div>
+                    <label for="Edision">Edision</label>
+                    <input type="text" name="Edision" id="Edision" placeholder="Edision" required>
+                </div>
+                <div>
+                    <button class="add-btn" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="ls.js"></script>    
+</body>
+</html>
